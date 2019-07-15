@@ -25,9 +25,6 @@ public class login extends AppCompatActivity
         String username,pass;
         username=user_name.getText().toString();
         pass=password.getText().toString();
-
-        BackgroundWorker backgroundWorker = new BackgroundWorker(this);
-        backgroundWorker.execute("login",username,pass);
     }
 
     private boolean isOnline()
