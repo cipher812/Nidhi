@@ -22,6 +22,14 @@ public class signup_qr extends AppCompatActivity
     TextView msg;
     BarcodeDetector barcodeDetector;
 
+    private void signup_api(String code)
+    {
+        BackgroundWorker backgroundWorker = new BackgroundWorker(this);
+        backgroundWorker.execute("signup",code);
+    }
+
+    //============================================================================================//
+
     private void  getqr_code()
     {
         barcodeDetector=new BarcodeDetector.Builder(this).setBarcodeFormats(Barcode.QR_CODE).build();
@@ -75,13 +83,17 @@ public class signup_qr extends AppCompatActivity
                         @Override
                         public void run()
                         {
-                            msg.setText(code.valueAt(0).displayValue);
+                            String scode=code.valueAt(0).displayValue;
+                            msg.setText(scode);
+                            signup_api(scode);
                         }
                     });
                 }
             }
         });
     }
+
+    //===========================================================================================//
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
