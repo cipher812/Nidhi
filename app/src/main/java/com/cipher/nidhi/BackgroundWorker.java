@@ -81,6 +81,10 @@ public class BackgroundWorker extends AsyncTask <String,Void,Void>
         {
             login_api(login_url,userName,password);
         }
+        else if(type.equals("signup"))
+        {
+
+        }
         return null;
     }
 
