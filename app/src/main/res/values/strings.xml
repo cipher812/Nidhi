@@ -7,4 +7,6 @@
     <string name="todo">TODO</string>
     <string name="name">Name</string>
     <string name="please_focus_on_qr_code">Please focus on QR code</string>
+    <string name="member_number">Member Number</string>
+    <string name="btn_continue">Continue</string>
 </resources>
