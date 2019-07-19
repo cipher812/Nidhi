@@ -9,6 +9,8 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.Window;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
@@ -52,8 +54,13 @@ public class signup_qr extends AppCompatActivity
     CameraSource cs;
     TextView msg;
     BarcodeDetector barcodeDetector;
+
     private RequestQueue mQueue;
     private  AlertDialog alertDialog;
+    private Button btn_continue;
+    private EditText txt_uname,txt_pass,txt_memno;
+
+    String scode,uname,pass,mno;
 
     public static void handleSSLHandshake()
     {
@@ -131,9 +138,9 @@ public class signup_qr extends AppCompatActivity
                     msg.post(new Runnable() {
                         @Override
                         public void run() {
-                            String scode = code.valueAt(0).displayValue;
+                            scode = code.valueAt(0).displayValue;
                             msg.setText(scode);
-                            signup_api(scode);
+                            //signup_api();
                         }
                     });
                 }
@@ -162,7 +169,7 @@ public class signup_qr extends AppCompatActivity
 
     //===========================================================================================//
 
-    private void signup_api(String scode)
+    private void signup_api()
     {
         final String url;
 
@@ -208,7 +215,9 @@ public class signup_qr extends AppCompatActivity
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
-                params.put("companycode", "finsoft");
+                params.put("companycode", scode);
+                //params.put("companycode", scode);
+                //params.put("companycode", scode);
                 return params;
             }
         };
@@ -217,6 +226,12 @@ public class signup_qr extends AppCompatActivity
     }
     //===========================================================================================//
 
+    private void get_Data()
+    {
+        uname=txt_uname.getText().toString();
+        pass=txt_pass.getText().toString();
+        mno=txt_memno.getText().toString();
+    }
 
     //===========================================================================================//
 
@@ -232,6 +247,10 @@ public class signup_qr extends AppCompatActivity
         mQueue = Volley.newRequestQueue(this);
         msg = findViewById(R.id.txt_msg);
         sv = findViewById(R.id.camera_prev);
+        btn_continue=findViewById(R.id.btn_continue);
+        txt_uname=findViewById(R.id.txt_uname);
+        txt_pass=findViewById(R.id.txt_pass);
+        txt_memno=findViewById(R.id.txt_mno);
 
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
         alertDialogBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -252,6 +271,14 @@ public class signup_qr extends AppCompatActivity
     {
         super.onStart();
         getqr_code();
+        btn_continue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                get_Data();
+                signup_api();
+            }
+        });
     }
 
 }

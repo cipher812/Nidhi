@@ -15,14 +15,15 @@
     <dist:module dist:instant="true" />
 
     <application
-        android:usesCleartextTraffic="true"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".signup_qr"></activity>
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".otp"></activity>
+        <activity android:name=".signup_qr" />
         <activity android:name=".dashboard" />
         <activity android:name=".login" />
         <activity android:name=".MainActivity">
