@@ -2,6 +2,7 @@ package com.cipher.nidhi;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.SparseArray;
@@ -12,6 +13,7 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -61,6 +63,7 @@ public class signup_qr extends AppCompatActivity
     private EditText txt_uname,txt_pass,txt_memno;
 
     String scode,uname,pass,mno;
+    String server_response,server_message;
 
     public static void handleSSLHandshake()
     {
@@ -174,7 +177,8 @@ public class signup_qr extends AppCompatActivity
         final String url;
 
         //url = "https://api.myjson.com/bins/kp9wz";
-        url = "https://192.168.15.202/apihandler/Apihandler/fetchcodes";
+        url = "https://192.168.15.202/apihandler/Apihandler/membersignup";
+        //url = "https://192.168.15.202/apihandler/Apihandler/fetchcodes";
 
 
         StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
@@ -183,22 +187,15 @@ public class signup_qr extends AppCompatActivity
             {
                 try
                 {
-                    String client="";
-                    int mno=0;
                     Log.d("response call",response);
-                    JSONObject obj1 = new JSONObject(response);
-                    JSONArray obj=obj1.getJSONArray("data");
+                    JSONObject obj = new JSONObject(response);
 
-                    for (int i = 0; i < obj.length(); i++)
-                    {
-                        JSONObject data = obj.getJSONObject(i);
+                    server_response=obj.getString("status");
+                    server_message=obj.getString("msg");
 
-                        client = data.getString("_client");
-                        mno = data.getInt("_member_no");
-                        Log.d("response",client+" "+mno);
-                    }
-                    store_to_file("data",client);
+                    Log.d("response",server_message+" "+server_response);
 
+                    check();
                 }
                 catch (JSONException e)
                 {
@@ -213,11 +210,13 @@ public class signup_qr extends AppCompatActivity
             }
         }){
             @Override
-            protected Map<String, String> getParams() {
+            protected Map<String, String> getParams()
+            {
                 Map<String, String> params = new HashMap<>();
                 params.put("companycode", scode);
-                //params.put("companycode", scode);
-                //params.put("companycode", scode);
+                params.put("username", uname);
+                params.put("password", pass);
+                params.put("memberno", mno);
                 return params;
             }
         };
@@ -231,10 +230,30 @@ public class signup_qr extends AppCompatActivity
         uname=txt_uname.getText().toString();
         pass=txt_pass.getText().toString();
         mno=txt_memno.getText().toString();
+
+        //store_to_file("data",scode+"\n"+mno);
     }
-
     //===========================================================================================//
+    private void check()
+    {
+        if(server_response.equals("0"))
+        {
+            alertDialog.setTitle("Message");
+            alertDialog.setMessage(server_message);
+            alertDialog.show();
+        }
+        else
+        {
+            Toast toast=Toast.makeText(getApplicationContext(),"Sucessfully Registerd",Toast.LENGTH_SHORT);
+            toast.show();
+            Intent otp = new Intent(signup_qr.this, otp.class);
+            otp.putExtra("member_key",mno);
+            otp.putExtra("scode",scode);
+            startActivity(otp);
 
+        }
+    }
+    //==========================================================================================//
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -277,6 +296,16 @@ public class signup_qr extends AppCompatActivity
             {
                 get_Data();
                 signup_api();
+
+                try
+                {
+                    Thread.sleep(2000);
+                }
+                catch (InterruptedException e)
+                {
+                    e.printStackTrace();
+                }
+
             }
         });
     }
