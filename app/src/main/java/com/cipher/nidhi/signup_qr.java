@@ -1,6 +1,5 @@
 package com.cipher.nidhi;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,12 +17,10 @@ import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.gms.vision.CameraSource;
@@ -31,11 +28,9 @@ import com.google.android.gms.vision.Detector;
 import com.google.android.gms.vision.barcode.Barcode;
 import com.google.android.gms.vision.barcode.BarcodeDetector;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.security.SecureRandom;
 import java.security.cert.X509Certificate;
@@ -153,31 +148,12 @@ public class signup_qr extends AppCompatActivity
 
     //===========================================================================================//
 
-    private void store_to_file(String filename,String data)
-    {
-        FileOutputStream outputStream;
-
-        try
-        {
-            outputStream = openFileOutput(filename, Context.MODE_PRIVATE);
-            outputStream.write(data.getBytes());
-            outputStream.close();
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-
-    }
-
-    //===========================================================================================//
-
     private void signup_api()
     {
         final String url;
 
         //url = "https://api.myjson.com/bins/kp9wz";
-        url = "https://192.168.15.202/apihandler/Apihandler/membersignup";
+        url = "https://192.168.15.46/apihandler/Apihandler/membersignup";
         //url = "https://192.168.15.202/apihandler/Apihandler/fetchcodes";
 
 

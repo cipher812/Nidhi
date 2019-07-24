@@ -2,9 +2,11 @@ package com.cipher.nidhi;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -45,9 +47,11 @@ public class login extends AppCompatActivity
     private Button btn_login;
     private TextView new_user;
     private EditText user_name,password;
+    private SharedPreferences AppPref;
+    private SharedPreferences.Editor AppEdit;
 
     private RequestQueue mQueue;
-    private String username="", pass="", server_response="";
+    private String username="", pass="", server_response="",server_msg="",scode="";
 
     public static void handleSSLHandshake()
     {
@@ -89,16 +93,38 @@ public class login extends AppCompatActivity
         pass=password.getText().toString();
     }
 
+    private void save_prefernce(String key,String val)
+    {
+        AppEdit.putString(key,val);
+        AppEdit.commit();
+    }
+
+    public String get_pref(String key)
+    {
+        String val;
+        val=AppPref.getString(key,"default");
+        return val;
+    }
+
     private void check()
     {
         if(server_response.equals("1"))
         {
-            Toast toast=Toast.makeText(getApplicationContext(),"Sign-In Success",Toast.LENGTH_SHORT);
+            Toast toast=Toast.makeText(getApplicationContext(),"Sign-In Success "+server_msg,Toast.LENGTH_SHORT);
             toast.show();
+            save_prefernce("uname",username);
+            save_prefernce("memberno",server_msg);
+            save_prefernce("companycode",scode);
+            Intent dash = new Intent(login.this, dashboard.class);
+            dash.putExtra("uname",username);
+            dash.putExtra("memberno",server_msg);
+            dash.putExtra("companycode",scode);
+            startActivity(dash);
+
         }
         else
         {
-            Toast toast=Toast.makeText(getApplicationContext(),"Sign-In Fail",Toast.LENGTH_SHORT);
+            Toast toast=Toast.makeText(getApplicationContext(),"Sign-In Fail"+" "+server_msg,Toast.LENGTH_LONG);
             toast.show();
         }
     }
@@ -145,7 +171,7 @@ public class login extends AppCompatActivity
         final String url;
 
         //url = "https://api.myjson.com/bins/kp9wz";
-        url = "https://192.168.15.202/apihandler/Apihandler/signinuser";
+        url = "https://192.168.15.46/apihandler/Apihandler/signinuser";
         //url = "https://192.168.15.202/apihandler/Apihandler/fetchcodes";
 
 
@@ -157,7 +183,10 @@ public class login extends AppCompatActivity
                     JSONObject obj = new JSONObject(response);
 
                     server_response = obj.getString("status");
-                    Log.d("server response", server_response);
+                    server_msg=obj.getString("msg");
+                    scode=obj.getString("data");
+
+                    Log.d("server response", server_response+" "+server_msg);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -189,10 +218,13 @@ public class login extends AppCompatActivity
     {
         requestWindowFeature(Window.FEATURE_NO_TITLE);  //will hide the title
         getSupportActionBar().hide();
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
         mQueue = Volley.newRequestQueue(this);
+        AppPref= PreferenceManager.getDefaultSharedPreferences(this);
+        AppEdit=AppPref.edit();
 
         btn_login=findViewById(R.id.btn_login);
         new_user=findViewById(R.id.signup);

@@ -1,13 +1,15 @@
 package com.cipher.nidhi;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.alimuzaffar.lib.pin.PinEntryEditText;
 import com.android.volley.Request;
@@ -36,6 +38,8 @@ public class otp extends AppCompatActivity
 {
     private PinEntryEditText pinEntry;
     private RequestQueue mQueue;
+    private SharedPreferences AppPref;
+    private SharedPreferences.Editor AppEdit;
 
     private String otp="",mno="",scode="",server_response;
     private Button btn_submit;
@@ -100,6 +104,12 @@ public class otp extends AppCompatActivity
 
     }
 
+    private void save_prefernce(String key,String val)
+    {
+        AppEdit.putString(key,val);
+        AppEdit.commit();
+    }
+
     private void getdata()
     {
         Intent iotp=getIntent();
@@ -107,12 +117,30 @@ public class otp extends AppCompatActivity
         scode=iotp.getStringExtra("scode");
     }
 
+    private void check()
+    {
+        if(server_response.equals("1"))
+        {
+            Toast msg=Toast.makeText(getApplicationContext(),"Signup Complete",Toast.LENGTH_LONG);
+            msg.show();
+            Intent login = new Intent(otp.this, login.class);
+            startActivity(login);
+            save_prefernce("companycode",scode);
+            save_prefernce("memberno", mno);
+        }
+        else
+        {
+            Toast msg=Toast.makeText(getApplicationContext(),"Signup Failed",Toast.LENGTH_LONG);
+            msg.show();
+        }
+    }
+
     private void signup_api()
     {
         final String url;
 
         //url = "https://api.myjson.com/bins/kp9wz";
-        url = "https://192.168.15.202/apihandler/Apihandler/validateOTP";
+        url = "https://192.168.15.46/apihandler/Apihandler/validateOTP";
         //url = "https://192.168.15.202/apihandler/Apihandler/fetchcodes";
 
 
@@ -132,6 +160,8 @@ public class otp extends AppCompatActivity
                 {
                     e.printStackTrace();
                 }
+
+                check();
             }
         }, new Response.ErrorListener() {
             @Override
@@ -159,6 +189,9 @@ public class otp extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_otp);
+
+        AppPref= PreferenceManager.getDefaultSharedPreferences(this);
+        AppEdit=AppPref.edit();
 
         mQueue = Volley.newRequestQueue(this);
         pinEntry = (PinEntryEditText) findViewById(R.id.txt_pin_entry);

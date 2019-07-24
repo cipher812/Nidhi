@@ -166,7 +166,6 @@ public class dashboard extends AppCompatActivity
                         initData();
                         listAdapter = new ExpandableListAdapter(dashboard.this, listDataHeader, listHash);
                         listView.setAdapter(listAdapter);
-                        listView.setO
                     }
                     else
                     {
@@ -260,7 +259,10 @@ public class dashboard extends AppCompatActivity
         new DownloadImageTask(profpic).execute(member_url);
     }
 
-    private void 
+    private void expand_data()
+    {
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
