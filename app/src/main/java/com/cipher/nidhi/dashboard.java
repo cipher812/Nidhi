@@ -142,12 +142,11 @@ public class dashboard extends AppCompatActivity
                         deposits=data.getString("deposits");
                         loans=data.getString("loans");
                         memberno=data.getString("memberid");
-
                         Log.i("dash response", server_response+" "+server_message+" "+member_name+" "+member_url);
+
                         set_data();
 
                         JSONArray arr=new JSONArray(data.getString("have"));
-
                         Log.i("raw",arr.toString());
 
                         for(int i=0;i<arr.length();i++)
@@ -163,9 +162,9 @@ public class dashboard extends AppCompatActivity
 
                             Log.i("raw",account_no[i]);
                         }
-                        initData();
-                        listAdapter = new ExpandableListAdapter(dashboard.this, listDataHeader, listHash);
-                        listView.setAdapter(listAdapter);
+
+                        expand_data();
+
                     }
                     else
                     {
@@ -261,7 +260,9 @@ public class dashboard extends AppCompatActivity
 
     private void expand_data()
     {
-
+        initData();
+        listAdapter = new ExpandableListAdapter(dashboard.this, listDataHeader, listHash);
+        listView.setAdapter(listAdapter);
     }
 
     @Override
