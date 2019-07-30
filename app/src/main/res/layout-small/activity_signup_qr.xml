@@ -36,7 +36,7 @@
 
     <EditText
         android:id="@+id/txt_uname"
-        android:layout_width="345dp"
+        android:layout_width="@dimen/_265sdp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
         android:autofillHints=""
@@ -57,7 +57,7 @@
 
     <EditText
         android:id="@+id/txt_pass"
-        android:layout_width="345dp"
+        android:layout_width="@dimen/_265sdp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
         android:autofillHints=""
@@ -78,7 +78,7 @@
 
     <EditText
         android:id="@+id/txt_mno"
-        android:layout_width="345dp"
+        android:layout_width="@dimen/_265sdp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="28dp"
         android:autofillHints=""
@@ -99,7 +99,7 @@
 
     <Button
         android:id="@+id/btn_continue"
-        android:layout_width="150dp"
+        android:layout_width="@dimen/_100sdp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="30dp"
         android:background="@drawable/button_signup"

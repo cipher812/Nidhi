@@ -10,17 +10,19 @@
     <SurfaceView
         android:id="@+id/camera_prev"
         android:layout_width="match_parent"
-        android:layout_height="500dp"
+        android:layout_height="@dimen/_180sdp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/txt_msg"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="-2dp" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/txt_msg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="14dp"
         android:layout_marginBottom="48dp"
         android:gravity="center"
         android:text="@string/please_focus_on_qr_code"
@@ -28,15 +30,13 @@
         android:textSize="30sp"
         app:layout_constraintBottom_toTopOf="@+id/txt_uname"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/camera_prev"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/txt_uname"
-        android:layout_width="445dp"
+        android:layout_width="@dimen/_265sdp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="11dp"
+        android:layout_marginBottom="20dp"
         android:autofillHints=""
         android:background="@drawable/signup_txt"
         android:drawableStart="@drawable/icons8_username_50w"
@@ -50,36 +50,33 @@
         android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@+id/txt_pass"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
         tools:targetApi="o" />
 
     <EditText
         android:id="@+id/txt_pass"
-        android:layout_width="445dp"
+        android:layout_width="@dimen/_265sdp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="26dp"
+        android:layout_marginBottom="20dp"
         android:autofillHints=""
         android:background="@drawable/signup_txt"
         android:drawableStart="@drawable/icons8_password_48w"
         android:drawablePadding="12dp"
         android:ems="10"
-        android:hint="@string/password"
         android:inputType="textPassword"
         android:padding="12dp"
         android:text="@string/password"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
+        android:hint="@string/password"
         android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@+id/txt_mno"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:targetApi="o" />
+        app:layout_constraintStart_toStartOf="parent" tools:targetApi="o" />
 
     <EditText
         android:id="@+id/txt_mno"
-        android:layout_width="445dp"
+        android:layout_width="@dimen/_265sdp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="72dp"
         android:autofillHints=""
@@ -95,15 +92,14 @@
         android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@+id/btn_continue"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
         tools:targetApi="o" />
 
     <Button
         android:id="@+id/btn_continue"
-        android:layout_width="180dp"
+        android:layout_width="@dimen/_100sdp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="240dp"
+        android:layout_marginBottom="276dp"
         android:background="@drawable/button_signup"
         android:drawableEnd="@drawable/icons8_right_arrow_32"
         android:text="@string/btn_continue"

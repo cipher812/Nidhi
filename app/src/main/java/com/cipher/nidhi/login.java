@@ -171,8 +171,8 @@ public class login extends AppCompatActivity
         final String url;
 
         //url = "https://api.myjson.com/bins/kp9wz";
-        url = "https://192.168.15.46/apihandler/Apihandler/signinuser";
-        //url = "https://192.168.15.202/apihandler/Apihandler/fetchcodes";
+        //url = "https://192.168.15.46/apihandler/Apihandler/signinuser";
+        url = "https://ignosi.in/apihandler/Apihandler/signinuser";
 
 
         final StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {

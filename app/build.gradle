@@ -33,5 +33,6 @@ dependencies {
         // androidx.appcompat as a dependency in your app.
         exclude group: 'androidx.appcompat', module: 'appcompat'
     }
+    implementation 'com.intuit.sdp:sdp-android:1.0.6'
 
 }

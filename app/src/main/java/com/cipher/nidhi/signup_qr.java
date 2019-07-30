@@ -153,8 +153,8 @@ public class signup_qr extends AppCompatActivity
         final String url;
 
         //url = "https://api.myjson.com/bins/kp9wz";
-        url = "https://192.168.15.46/apihandler/Apihandler/membersignup";
-        //url = "https://192.168.15.202/apihandler/Apihandler/fetchcodes";
+        //url = "https://192.168.15.46/apihandler/Apihandler/membersignup";
+        url = "https://ignosi.in/apihandler/Apihandler/membersignup";
 
 
         StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {

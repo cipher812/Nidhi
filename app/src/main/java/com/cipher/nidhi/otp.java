@@ -140,8 +140,8 @@ public class otp extends AppCompatActivity
         final String url;
 
         //url = "https://api.myjson.com/bins/kp9wz";
-        url = "https://192.168.15.46/apihandler/Apihandler/validateOTP";
-        //url = "https://192.168.15.202/apihandler/Apihandler/fetchcodes";
+        //url = "https://192.168.15.46/apihandler/Apihandler/validateOTP";
+        url = "https://ignosi.in/apihandler/Apihandler/validateOTP";
 
 
         final StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {

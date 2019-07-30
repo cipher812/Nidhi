@@ -1,13 +1,15 @@
 <resources>
-    <string name="app_name">Nidhi</string>
+    <string name="app_name">Ignosi Nidhi</string>
     <string name="user_name">User Name</string>
     <string name="password">Password</string>
     <string name="log_in">LOG-IN</string>
     <string name="not_a_member_signup">Not a member?...Signup !</string>
-    <string name="todo">TODO</string>
-    <string name="name">Name</string>
     <string name="please_focus_on_qr_code">Please focus on QR code</string>
     <string name="member_number">Member Number</string>
     <string name="btn_continue">Continue</string>
     <string name="msgres">We have send an OTP to your registerd phone number. Enter OTP here</string>
+    <string name="deposit">Deposit</string>
+    <string name="loan">Loan</string>
+    <string name="todo">TODO</string>
+    <string name="confirm">Confirm</string>
 </resources>
